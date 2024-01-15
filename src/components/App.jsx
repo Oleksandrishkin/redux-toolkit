@@ -1,16 +1,17 @@
+import { Layout } from "./Layout/Layout";
+import { AppBar } from "./AppBar/AppBar";
+import { TaskForm } from "./TaskForm/TaskForm";
+import { TaskList } from "./TaskList/TaskList";
+import { useSelector } from "react-redux";
+
 export const App = () => {
+  // const state = useSelector((state)=>state.task[1])
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+
+    <Layout>
+      <AppBar />
+      <TaskForm />
+      <TaskList />
+    </Layout>
   );
 };
