@@ -4,8 +4,8 @@ import css from "./TaskList.module.css";
 import { statusFilters } from "redux/constants";
 import { getFiltersStatus, getTasks } from "../../redux/selectors";
 export const TaskList = () => {
-  const task = useSelector(getTasks())
-  const filterStatus = useSelector(getFiltersStatus())
+  const task = useSelector(getTasks)
+  const filterStatus = useSelector(getFiltersStatus)
  const vidibleTask =  task.filter((task)=>{
     switch (filterStatus) {
       case statusFilters.active:

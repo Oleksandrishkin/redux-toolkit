@@ -5,7 +5,7 @@ import { statusFilters } from "redux/constants";
 import { setStatusFilter} from "../../redux/slice";
 import { getFiltersStatus } from "../../redux/selectors";
 export const StatusFilter = () => {
-  const filter = useSelector(getFiltersStatus())
+  const filter = useSelector(getFiltersStatus)
 const dispatch = useDispatch()
   const handleToggle = (value)=>{
 dispatch(setStatusFilter(value))
