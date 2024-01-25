@@ -3,9 +3,9 @@ import { Button } from "../Button/Button";
 import css from "./StatusFilter.module.css";
 import { statusFilters } from "redux/constants";
 import { setStatusFilter} from "../../redux/slice";
-import { getFiltersStatus } from "redux/selectors";
+import { getFiltersStatus } from "../../redux/selectors";
 export const StatusFilter = () => {
-  const filter = useSelector(getFiltersStatus)
+  const filter = useSelector(getFiltersStatus())
 const dispatch = useDispatch()
   const handleToggle = (value)=>{
 dispatch(setStatusFilter(value))

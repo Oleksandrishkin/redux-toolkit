@@ -14,27 +14,23 @@ export const taskSlice = createSlice({
     { id: 4, text: "Build amazing apps", completed: false },
   ],
 
-reducers: {
-  addTask(state, action){
-state.push(action.payload)
-  },
-  deleteTask( state, action){
-    state.filter((task)=>task.id !== action.payload)
-  }, 
-  toggleCompleted(state, action){
-    state.map((task) => {
-        
-      if (task.id !== action.payload) {
-        return task;
-      }
-      return { ...task, completed: !task.completed };
-    });
+  reducers: {
+    addTask(state, action) {
+      state.push(action.payload);
+    },
+    deleteTask(state, action) {
+      return state.filter((task) => task.id !== action.payload);
+    }, 
+    toggleCompleted(state, action) {
+      return state.map((task) => {
+        if (task.id !== action.payload) {
+          return task;
+        }
+        return { ...task, completed: !task.completed };
+      });
+    }
   }
-
-}
-})
-
-
+});
 
 export const FiltersSlice = createSlice({
   name: "filters",
