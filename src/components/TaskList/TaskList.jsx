@@ -6,6 +6,13 @@ import { getFiltersStatus, getTasks } from "../../redux/selectors";
 export const TaskList = () => {
   const task = useSelector(getTasks)
   const filterStatus = useSelector(getFiltersStatus)
+
+
+
+
+
+
+  
  const vidibleTask =  task.filter((task)=>{
     switch (filterStatus) {
       case statusFilters.active:
