@@ -1,18 +1,22 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Task } from "../Task/Task";
 import css from "./TaskList.module.css";
 import { statusFilters } from "redux/constants";
 import { getFiltersStatus, getTasks } from "../../redux/selectors";
+import { useEffect } from "react";
+import { fetchTasks } from "../../redux/operations";
 export const TaskList = () => {
   const task = useSelector(getTasks)
   const filterStatus = useSelector(getFiltersStatus)
+const dispatch = useDispatch()
+
+useEffect(()=>{
+dispatch(fetchTasks())
+}, [dispatch])
 
 
 
 
-
-
-  
  const vidibleTask =  task.filter((task)=>{
     switch (filterStatus) {
       case statusFilters.active:
