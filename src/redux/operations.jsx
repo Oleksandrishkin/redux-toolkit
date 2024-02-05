@@ -23,7 +23,26 @@ thunkApi.rejectWithValue('Упс Помилка')
 })
 
 
+export const deleteTask = createAsyncThunk('task/delete', async (task, thunkAPI)=>{
+    try{
+const res = await axios.delete(`tasks/${task.id}`)
+return res.data
+    }catch(error){
+thunkAPI.rejectWithValue(error.message)
+    }
+})
 
+
+export const toglleComplited = createAsyncThunk('task/toglleCompleted', async (task, thunkAPI)=>{
+    try{
+const res = await axios.put(`tasks/${task.id}`, {
+    completed: !task.completed
+})
+return res.data
+    }catch(error){
+thunkAPI.rejectWithValue(error.message)
+    }
+})
 // tasks/fetchTasks/pending
 //tasks/fetchTasks/fullfield
 // tasks/fetchTasks/

@@ -1,8 +1,8 @@
 import { combineReducers, legacy_createStore as createStore} from 'redux';
 import { devToolsEnhancer } from "@redux-devtools/extension";
 import { statusFilters } from './constants';
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { addTask, addTasks, fetchTasks } from './operations';
+import { configureStore, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { addTask, addTasks, deleteTask, fetchTasks, toglleComplited } from './operations';
 
 
 export const taskSlice = createSlice({
@@ -33,28 +33,46 @@ export const taskSlice = createSlice({
   extraReducers(builder){
 
       builder
-      .addCase(fetchTasks.pending, (state)=>{
-        state.isLoading = true
-      })
+    
       .addCase(fetchTasks.fulfilled, (state, action)=>{
-        state.isLoading = false
-        state.error = null
+       
         state.items = action.payload
       })
-    .addCase(fetchTasks.rejected, (state, action)=>{
-      state.error = action.payload
-    })
-    .addCase(addTask.pending, (state)=>{
-      state.isLoading = true
-    })
+   
     .addCase(addTask.fulfilled, (state, action)=>{
-      state.isLoading = false
-      state.error = null
+   
       state.items.push(action.payload)
     })
-  .addCase(addTask.rejected, (state, action)=>{
-    state.error = action.payload
+  
+  .addCase(deleteTask.fulfilled, (state, action)=>{
+
+   
+    const idx = state.items.findIndex((item)=>item.id === action.payload.id) 
+    state.items.splice(idx, 1)
   })
+
+.addCase(toglleComplited.fulfilled, (state, action)=>{
+  
+ 
+  const idx = state.items.findIndex((item)=>item.id === action.payload.id) 
+  state.items.splice(idx, 1, action.payload)
+})
+.addCase(toglleComplited.rejected, (state, action)=>{
+state.error = action.payload
+})
+
+.addMatcher(isAnyOf(fetchTasks.pending, addTask.pending, deleteTask.pending, toglleComplited.pendin), (state) =>{
+state.isLoading = true
+})
+.addMatcher(isAnyOf(fetchTasks.rejected, addTask.rejected, deleteTask.rejected, toglleComplited.rejected), (state, action)=>{
+  state.error = action.payload
+})
+.addMatcher(isAnyOf(fetchTasks.fulfilled, addTask.fulfilled, deleteTask.fulfilled, toglleComplited.fulfilled),(state, action)=>{
+  state.isLoading = false
+  state.error = null
+})
+
+
   }
 
   
