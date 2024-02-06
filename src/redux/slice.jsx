@@ -61,7 +61,7 @@ export const taskSlice = createSlice({
 state.error = action.payload
 })
 
-.addMatcher(isAnyOf(fetchTasks.pending, addTask.pending, deleteTask.pending, toglleComplited.pendin), (state) =>{
+.addMatcher(isAnyOf(fetchTasks.pending, addTask.pending, deleteTask.pending, toglleComplited.pending), (state) =>{
 state.isLoading = true
 })
 .addMatcher(isAnyOf(fetchTasks.rejected, addTask.rejected, deleteTask.rejected, toglleComplited.rejected), (state, action)=>{

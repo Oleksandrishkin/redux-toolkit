@@ -11,7 +11,7 @@ export const AppBar = () => {
       </section>
       <section className={css.section}>
         <h2 className={css.title}>Filter by status</h2>
-        {/* <StatusFilter /> */}
+        <StatusFilter />
       </section>
     </header>
   );
